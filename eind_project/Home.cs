@@ -41,7 +41,7 @@ namespace eind_project
         private void button4_Click(object sender, EventArgs e)
         {
             AssignmentDAO assignmentDAO = new AssignmentDAO();
-            List<Assignment> assignmentList = assignmentDAO.getByTitle(SearchInput.Text);
+            List<Assignment> assignmentList = assignmentDAO.getByTitle(SearchInput.Text, currentUser.Id);
 
             dataGridView1.Rows.Clear();
 

@@ -42,6 +42,20 @@ namespace eind_project
             return user;
         }
 
+        public void addUser(User user)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand("INSERT INTO [User] (username, password) VALUES (@username, @password)", connection);
+            command.Parameters.AddWithValue("@username", user.username);
+            command.Parameters.AddWithValue("@password", user.password);
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+
         public List<Assignment> getListByUser(int user_id)
         {
             List<Assignment> assignmentList = new List<Assignment>();
@@ -73,7 +87,7 @@ namespace eind_project
             return assignmentList;
         }
 
-        public List<Assignment> getByTitle(string title)
+        public List<Assignment> getByTitle(string title, int userID)
         {
             List<Assignment> assignmentList = new List<Assignment>();
 
@@ -83,8 +97,9 @@ namespace eind_project
 
             String searchTerm = "%" + title + "%";
 
-            SqlCommand command = new SqlCommand("SELECT * FROM [Assignment] WHERE title LIKE @search");
+            SqlCommand command = new SqlCommand("SELECT * FROM [Assignment] WHERE title LIKE @search AND user_id = @userID");
             command.Parameters.AddWithValue("@search", searchTerm);
+            command.Parameters.AddWithValue("@userID", userID);
             command.Connection = connection;
 
             using (SqlDataReader reader = command.ExecuteReader())

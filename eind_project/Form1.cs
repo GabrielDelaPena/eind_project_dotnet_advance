@@ -29,5 +29,12 @@ namespace eind_project
             home.Show();
             this.Hide();
         }
+
+        private void RegisterBtn_Click(object sender, EventArgs e)
+        {
+            Register register = new Register();
+            register.Show();
+            
+        }
     }
 }
