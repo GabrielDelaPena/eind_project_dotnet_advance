@@ -11,7 +11,8 @@ namespace eind_project
 {
     internal class AssignmentDAO
     {
-        string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\delap\\OneDrive\\Documents\\ProgVak\\Fase 2\\1ste_Sem\\.NET Advanced\\Eind_Project\\project\\eind_project\\eind_project\\Assignment.mdf\";Integrated Security=True";
+        static string par = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\", "Assignment.mdf"));
+        string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={par};Integrated Security=True";
 
         public User getUser(string username, string password)
         {
